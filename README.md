@@ -9,5 +9,10 @@ and enabled using the
 this demo renders smoothly animating updates to Orbs using the
 [UIKit framework](https://developer.apple.com/library/ios/documentation/UIKit/Reference/UIKit_Framework/).
 
+## Running the Demo
+
+Before loading the project in Xcode you will need to download the `Diffusion.framework` and put it in
+the `Frameworks` folder.
+
 The latest version of the SDK can be downloaded from:<br />
 [https://developer.reappt.io/clients/apple/](http://developer.reappt.io/clients/apple/)

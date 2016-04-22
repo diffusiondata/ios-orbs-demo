@@ -14,6 +14,7 @@
 //  limitations under the License.
 
 import UIKit
+import Diffusion
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -23,6 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        NSLog("Diffusion Client Library Version: %@", PTDiffusionVersion.versionOfClientLibrary());
         return true
     }
 
