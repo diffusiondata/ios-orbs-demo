@@ -57,7 +57,13 @@ class OrbsClient: NSObject, PTDiffusionTopicStreamDelegate {
     }
 
     func diffusionStream(stream: PTDiffusionStream, didUpdateTopicPath topicPath: String, content: PTDiffusionContent, context: PTDiffusionUpdateContext) {
-        NSLog("%@: %@", topicPath, content)
+        let csv = String(data: content.data, encoding: NSUTF8StringEncoding)
+        let fields = csv!.componentsSeparatedByString(",")
+        let xField = fields[0]
+        let yField = fields[1]
+        let colourField = fields[2]
+        let alphaField = fields[3]
+        NSLog("%@: %@ (%@) at %@,%@", topicPath, colourField, alphaField, xField, yField)
     }
 
     func fail(error: NSError) {
