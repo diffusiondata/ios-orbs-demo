@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2E77FB0E1CCA4B7700EFB056 /* Diffusion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E77FB0C1CCA4B7700EFB056 /* Diffusion.framework */; };
 		2E77FB101CCA4C9300EFB056 /* Diffusion.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2E77FB0C1CCA4B7700EFB056 /* Diffusion.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		2E77FB131CCA616700EFB056 /* OrbsClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E77FB121CCA616700EFB056 /* OrbsClient.swift */; };
 		2EFE51A01CCA3DEC00970A4E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EFE519F1CCA3DEC00970A4E /* AppDelegate.swift */; };
 		2EFE51A21CCA3DEC00970A4E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EFE51A11CCA3DEC00970A4E /* ViewController.swift */; };
 		2EFE51A51CCA3DEC00970A4E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2EFE51A31CCA3DEC00970A4E /* Main.storyboard */; };
@@ -32,6 +33,7 @@
 
 /* Begin PBXFileReference section */
 		2E77FB0C1CCA4B7700EFB056 /* Diffusion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Diffusion.framework; sourceTree = "<group>"; };
+		2E77FB121CCA616700EFB056 /* OrbsClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrbsClient.swift; sourceTree = "<group>"; };
 		2EFE519C1CCA3DEC00970A4E /* Orbs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Orbs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EFE519F1CCA3DEC00970A4E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2EFE51A11CCA3DEC00970A4E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -82,6 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				2EFE519F1CCA3DEC00970A4E /* AppDelegate.swift */,
+				2E77FB121CCA616700EFB056 /* OrbsClient.swift */,
 				2EFE51A11CCA3DEC00970A4E /* ViewController.swift */,
 				2EFE51A31CCA3DEC00970A4E /* Main.storyboard */,
 				2EFE51A61CCA3DEC00970A4E /* Assets.xcassets */,
@@ -164,6 +167,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2EFE51A21CCA3DEC00970A4E /* ViewController.swift in Sources */,
+				2E77FB131CCA616700EFB056 /* OrbsClient.swift in Sources */,
 				2EFE51A01CCA3DEC00970A4E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

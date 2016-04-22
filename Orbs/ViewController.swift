@@ -16,9 +16,13 @@
 import UIKit
 
 class ViewController: UIViewController {
+    var client: OrbsClient?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        let url:NSURL = NSURL(string: "ws://localhost:8080")!;
+        client = OrbsClient(url: url)
     }
 
 }
