@@ -30,6 +30,11 @@ class OrbsClient: NSObject, PTDiffusionTopicStreamDelegate {
     var listener: OrbListener?
 
     func connect(url: NSURL) {
+        if (nil != session) {
+            // Already connecting or connected
+            return
+        }
+
         NSLog("Connecting...")
         PTDiffusionSession.openWithURL(url) { (session, error) -> Void in
             if let connectedSession = session {
@@ -56,6 +61,12 @@ class OrbsClient: NSObject, PTDiffusionTopicStreamDelegate {
                 self.fail(error!)
             }
         }
+    }
+
+    func disconnect() {
+        NSLog("Disconnecting")
+        session?.close()
+        session = nil
     }
 
     func diffusionStream(stream: PTDiffusionStream, didUpdateTopicPath topicPath: String, content: PTDiffusionContent, context: PTDiffusionUpdateContext) {
