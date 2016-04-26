@@ -17,14 +17,15 @@ import UIKit
 
 class ViewController: UIViewController {
     private var client: OrbsClient?
-    private var layer: OrbsLayer?
+
+    @IBOutlet weak var orbsView: OrbsView?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Create Diffusion client subscribing for updates to Orbs
         client = OrbsClient()
-        layer = self.view.layer as? OrbsLayer
+        let layer = orbsView?.layer as? OrbsLayer
         client!.listener = layer
 
         // Connect immediately
