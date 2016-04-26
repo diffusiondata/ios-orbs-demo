@@ -16,3 +16,5 @@ the `Frameworks` folder.
 
 The latest version of the SDK can be downloaded from:<br />
 [https://developer.reappt.io/clients/apple/](http://developer.reappt.io/clients/apple/)
+
+Requires Xcode 7.3 or higher as the code relies on language features fixed in Swift 2.2.
