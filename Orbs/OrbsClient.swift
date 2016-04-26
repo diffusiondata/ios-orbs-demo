@@ -22,12 +22,14 @@ let rootTopicPath = "OrbsDemo";
 // Topic selector expression for the Orbs Demo's root topic and descendants.
 let topicSelector = "*" + rootTopicPath + "//";
 
+// The string preceeding the Orb key in the full topic path.
+let topicPathPrefix = rootTopicPath + "/";
+
 class OrbsClient: NSObject, PTDiffusionTopicStreamDelegate {
-    var session: PTDiffusionSession?
+    private var session: PTDiffusionSession?
+    var listener: OrbListener?
 
-    init(url: NSURL) {
-        super.init()
-
+    func connect(url: NSURL) {
         NSLog("Connecting...")
         PTDiffusionSession.openWithURL(url) { (session, error) -> Void in
             if let connectedSession = session {
@@ -57,16 +59,23 @@ class OrbsClient: NSObject, PTDiffusionTopicStreamDelegate {
     }
 
     func diffusionStream(stream: PTDiffusionStream, didUpdateTopicPath topicPath: String, content: PTDiffusionContent, context: PTDiffusionUpdateContext) {
-        let csv = String(data: content.data, encoding: NSUTF8StringEncoding)
-        let fields = csv!.componentsSeparatedByString(",")
-        let xField = fields[0]
-        let yField = fields[1]
-        let colourField = fields[2]
-        let alphaField = fields[3]
-        NSLog("%@: %@ (%@) at %@,%@", topicPath, colourField, alphaField, xField, yField)
+        if let key = OrbKey(topicPath: topicPath.substringFromIndex(topicPathPrefix.endIndex)) {
+            let state = OrbState(csv: String(data: content.data, encoding: NSUTF8StringEncoding)!)
+            listener?.orbDidUpdate(key, state: state)
+        }
     }
 
-    func fail(error: NSError) {
+    func diffusionStream(stream: PTDiffusionStream, didUnsubscribeFromTopicPath topicPath: String, reason: PTDiffusionTopicUnsubscriptionReason) {
+        if let key = OrbKey(topicPath: topicPath.substringFromIndex(topicPathPrefix.endIndex)) {
+            listener?.orbDidDisappear(key)
+        }
+    }
+
+    private func keyForTopicPath(topicPath: String) -> String {
+        return topicPath.substringFromIndex(topicPathPrefix.endIndex)
+    }
+
+    private func fail(error: NSError) {
         NSLog("Failed: %@", error)
     }
 }

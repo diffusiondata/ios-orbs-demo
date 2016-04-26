@@ -13,22 +13,7 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 
-import UIKit
-
-class ViewController: UIViewController {
-    private var client: OrbsClient?
-    private var layer: OrbsLayer?
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Create Diffusion client subscribing for updates to Orbs
-        client = OrbsClient()
-        layer = self.view.layer as? OrbsLayer
-        client!.listener = layer
-
-        // Connect immediately
-        let url:NSURL = NSURL(string: "ws://localhost:8080")!;
-        client!.connect(url)
-    }
+protocol OrbListener {
+    func orbDidUpdate(key: OrbKey, state: OrbState)
+    func orbDidDisappear(key: OrbKey)
 }
