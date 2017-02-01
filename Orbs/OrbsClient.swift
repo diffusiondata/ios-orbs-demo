@@ -26,7 +26,7 @@ let topicSelector = "*" + rootTopicPath + "//";
 let topicPathPrefix = rootTopicPath + "/";
 
 class OrbsClient: NSObject, PTDiffusionTopicStreamDelegate {
-    fileprivate var session: PTDiffusionSession?
+    private var session: PTDiffusionSession?
     var listener: OrbListener?
 
     func connect(url: URL) {
@@ -82,7 +82,7 @@ class OrbsClient: NSObject, PTDiffusionTopicStreamDelegate {
         }
     }
 
-    fileprivate func fail(_ error: NSError) {
+    private func fail(_ error: NSError) {
         NSLog("Failed: %@", error)
     }
 }

@@ -16,7 +16,7 @@
 import UIKit
 
 class ViewController: UIViewController {
-    fileprivate var client: OrbsClient?
+    private var client: OrbsClient?
 
     @IBOutlet weak var orbsView: OrbsView?
 
