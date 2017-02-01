@@ -82,10 +82,6 @@ class OrbsClient: NSObject, PTDiffusionTopicStreamDelegate {
         }
     }
 
-    fileprivate func keyForTopicPath(_ topicPath: String) -> String {
-        return topicPath.substring(from: topicPathPrefix.endIndex)
-    }
-
     fileprivate func fail(_ error: NSError) {
         NSLog("Failed: %@", error)
     }
