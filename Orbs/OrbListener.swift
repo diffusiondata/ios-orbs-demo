@@ -14,6 +14,6 @@
 //  limitations under the License.
 
 protocol OrbListener {
-    func orbDidUpdate(key: OrbKey, state: OrbState)
-    func orbDidDisappear(key: OrbKey)
+    func orbDidUpdate(_ key: OrbKey, state: OrbState)
+    func orbDidDisappear(_ key: OrbKey)
 }

@@ -18,7 +18,7 @@ class OrbState {
     let colour: (r: Float, g: Float, b: Float, a: Float)
 
     init(csv: String) {
-        let fields = csv.componentsSeparatedByString(",")
+        let fields = csv.components(separatedBy: ",")
         let xField = fields[0]
         let yField = fields[1]
         let colourField = fields[2]
@@ -29,11 +29,11 @@ class OrbState {
         // Colour field is three characters, each being a hexadecimal digit
         // representing the most significant nibble for a colour component.
         var cc = colourField.startIndex;
-        let r = Int(colourField.substringWithRange(cc...cc), radix: 16)
-        cc = cc.advancedBy(1)
-        let g = Int(colourField.substringWithRange(cc...cc), radix: 16)
-        cc = cc.advancedBy(1)
-        let b = Int(colourField.substringWithRange(cc...cc), radix: 16)
+        let r = Int(colourField.substring(with: cc...cc), radix: 16)
+        cc = <#T##Collection corresponding to `cc`##Collection#>.index(cc, offsetBy: 1)
+        let g = Int(colourField.substring(with: cc...cc), radix: 16)
+        cc = <#T##Collection corresponding to `cc`##Collection#>.index(cc, offsetBy: 1)
+        let b = Int(colourField.substring(with: cc...cc), radix: 16)
 
         // Store colour components, including opacity, as RGBA tuple.
         colour = (

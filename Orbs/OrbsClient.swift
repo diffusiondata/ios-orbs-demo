@@ -26,17 +26,17 @@ let topicSelector = "*" + rootTopicPath + "//";
 let topicPathPrefix = rootTopicPath + "/";
 
 class OrbsClient: NSObject, PTDiffusionTopicStreamDelegate {
-    private var session: PTDiffusionSession?
+    fileprivate var session: PTDiffusionSession?
     var listener: OrbListener?
 
-    func connect(url: NSURL) {
+    func connect(_ url: URL) {
         if (nil != session) {
             // Already connecting or connected
             return
         }
 
         NSLog("Connecting...")
-        PTDiffusionSession.openWithURL(url) { (session, error) -> Void in
+        PTDiffusionSession.open(with: url) { (session, error) -> Void in
             if let connectedSession = session {
                 NSLog("Connected.")
 
@@ -45,20 +45,20 @@ class OrbsClient: NSObject, PTDiffusionTopicStreamDelegate {
 
                 // Register self as the topic stream handler for the Orbs Demo tree.
                 let localSelector = PTDiffusionTopicSelector(expression: topicSelector)
-                connectedSession.topics.addTopicStreamWithSelector(localSelector, delegate: self)
+                connectedSession.topics.addTopicStream(with: localSelector, delegate: self)
 
                 // Subscribe to the Orbs demo topic tree.
                 NSLog("Subscribing...")
-                connectedSession.topics.subscribeWithTopicSelectorExpression(topicSelector) { (error) -> Void in
+                connectedSession.topics.subscribe(withTopicSelectorExpression: topicSelector) { (error) -> Void in
                     if (error != nil) {
-                        self.fail(error!)
+                        self.fail(error! as NSError)
                         return
                     }
 
                     NSLog("Subscribed.")
                 }
             } else {
-                self.fail(error!)
+                self.fail(error! as NSError)
             }
         }
     }
@@ -69,24 +69,24 @@ class OrbsClient: NSObject, PTDiffusionTopicStreamDelegate {
         session = nil
     }
 
-    func diffusionStream(stream: PTDiffusionStream, didUpdateTopicPath topicPath: String, content: PTDiffusionContent, context: PTDiffusionUpdateContext) {
-        if let key = OrbKey(topicPath: topicPath.substringFromIndex(topicPathPrefix.endIndex)) {
-            let state = OrbState(csv: String(data: content.data, encoding: NSUTF8StringEncoding)!)
+    func diffusionStream(_ stream: PTDiffusionStream, didUpdateTopicPath topicPath: String, content: PTDiffusionContent, context: PTDiffusionUpdateContext) {
+        if let key = OrbKey(topicPath: topicPath.substring(from: topicPathPrefix.endIndex)) {
+            let state = OrbState(csv: String(data: content.data, encoding: String.Encoding.utf8)!)
             listener?.orbDidUpdate(key, state: state)
         }
     }
 
-    func diffusionStream(stream: PTDiffusionStream, didUnsubscribeFromTopicPath topicPath: String, reason: PTDiffusionTopicUnsubscriptionReason) {
-        if let key = OrbKey(topicPath: topicPath.substringFromIndex(topicPathPrefix.endIndex)) {
+    func diffusionStream(_ stream: PTDiffusionStream, didUnsubscribeFromTopicPath topicPath: String, reason: PTDiffusionTopicUnsubscriptionReason) {
+        if let key = OrbKey(topicPath: topicPath.substring(from: topicPathPrefix.endIndex)) {
             listener?.orbDidDisappear(key)
         }
     }
 
-    private func keyForTopicPath(topicPath: String) -> String {
-        return topicPath.substringFromIndex(topicPathPrefix.endIndex)
+    fileprivate func keyForTopicPath(_ topicPath: String) -> String {
+        return topicPath.substring(from: topicPathPrefix.endIndex)
     }
 
-    private func fail(error: NSError) {
+    fileprivate func fail(_ error: NSError) {
         NSLog("Failed: %@", error)
     }
 }

@@ -16,7 +16,7 @@
 import UIKit
 
 class ViewController: UIViewController {
-    private var client: OrbsClient?
+    fileprivate var client: OrbsClient?
 
     @IBOutlet weak var orbsView: OrbsView?
 
@@ -31,16 +31,16 @@ class ViewController: UIViewController {
         client.listener = layer
 
         // Connect immediately
-        let url:NSURL = NSURL(string: "ws://localhost:8080")!;
+        let url:URL = URL(string: "ws://localhost:8080")!;
         client.connect(url)
 
         // Observe application foreground state, as we don't want our connection
         // to the Diffusion server active when in the background.
-        let nc = NSNotificationCenter.defaultCenter()
-        observers.append(nc.addObserverForName(UIApplicationDidEnterBackgroundNotification, object: nil, queue: nil) { (NSNotification) in
+        let nc = NotificationCenter.default
+        observers.append(nc.addObserver(forName: NSNotification.Name.UIApplicationDidEnterBackground, object: nil, queue: nil) { (NSNotification) in
             client.disconnect()
         })
-        observers.append(nc.addObserverForName(UIApplicationWillEnterForegroundNotification, object: nil, queue: nil) { (NSNotification) in
+        observers.append(nc.addObserver(forName: NSNotification.Name.UIApplicationWillEnterForeground, object: nil, queue: nil) { (NSNotification) in
             client.connect(url)
         })
 
@@ -50,7 +50,7 @@ class ViewController: UIViewController {
     }
 
     deinit {
-        let nc = NSNotificationCenter.defaultCenter()
+        let nc = NotificationCenter.default
         for observer in observers {
             nc.removeObserver(observer)
         }

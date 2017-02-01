@@ -21,8 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        NSLog("Diffusion Client Library Version: %@", PTDiffusionVersion.versionOfClientLibrary());
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        NSLog("Diffusion Client Library Version: %@", PTDiffusionVersion.ofClientLibrary());
         return true
     }
 

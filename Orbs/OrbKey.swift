@@ -26,16 +26,16 @@ class OrbKey: Hashable {
 
     init?(topicPath: String) {
         let string = topicPath as NSString
-        let results = Static.regex.matchesInString(
-            topicPath,
+        let results = Static.regex.matches(
+            in: topicPath,
             options:[],
             range:NSMakeRange(0, string.length))
         if (1 != results.count) {
             return nil
         }
         let result = results[0]
-        self.sessionId = string.substringWithRange(result.rangeAtIndex(1))
-        self.orbIndex = UInt(string.substringWithRange(result.rangeAtIndex(2)))!
+        self.sessionId = string.substring(with: result.rangeAt(1))
+        self.orbIndex = UInt(string.substring(with: result.rangeAt(2)))!
     }
 
     var hashValue: Int {

@@ -17,8 +17,8 @@ import UIKit
 import CoreGraphics
 
 class OrbLayer: CALayer {
-    private var _state: OrbState?
-    private var _performanceBounds: CGRect?
+    fileprivate var _state: OrbState?
+    fileprivate var _performanceBounds: CGRect?
 
     var state: OrbState? {
         get {
@@ -36,7 +36,7 @@ class OrbLayer: CALayer {
                     colorLiteralRed: colour.r,
                     green: colour.g,
                     blue: colour.b,
-                    alpha: colour.a).CGColor
+                    alpha: colour.a).cgColor
 
                 // The frame can only be set if we also know the performance bounds.
                 updateFrame()
@@ -58,8 +58,8 @@ class OrbLayer: CALayer {
         }
     }
 
-    private func updateFrame() {
-        if let state = _state, performanceBounds = _performanceBounds {
+    fileprivate func updateFrame() {
+        if let state = _state, let performanceBounds = _performanceBounds {
             let w = performanceBounds.size.width
             let r = w * 0.05
             let d = r * 2.0
