@@ -18,7 +18,7 @@ import UIKit
 class OrbsLayer: CALayer, OrbListener {
     var layers = [OrbKey: OrbLayer]()
 
-    func orbDidUpdate(_ key: OrbKey, state: OrbState) {
+    func orbDidUpdate(key: OrbKey, state: OrbState) {
         if let existingLayer = layers[key] {
             existingLayer.state = state
         } else {
@@ -29,7 +29,7 @@ class OrbsLayer: CALayer, OrbListener {
         }
     }
 
-    func orbDidDisappear(_ key: OrbKey) {
+    func orbDidDisappear(key: OrbKey) {
         if let layer = layers[key] {
             layer.removeFromSuperlayer()
             layers[key] = nil

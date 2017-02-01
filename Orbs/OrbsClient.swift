@@ -72,13 +72,13 @@ class OrbsClient: NSObject, PTDiffusionTopicStreamDelegate {
     func diffusionStream(_ stream: PTDiffusionStream, didUpdateTopicPath topicPath: String, content: PTDiffusionContent, context: PTDiffusionUpdateContext) {
         if let key = OrbKey(topicPath: topicPath.substring(from: topicPathPrefix.endIndex)) {
             let state = OrbState(csv: String(data: content.data, encoding: String.Encoding.utf8)!)
-            listener?.orbDidUpdate(key, state: state)
+            listener?.orbDidUpdate(key: key, state: state)
         }
     }
 
     func diffusionStream(_ stream: PTDiffusionStream, didUnsubscribeFromTopicPath topicPath: String, reason: PTDiffusionTopicUnsubscriptionReason) {
         if let key = OrbKey(topicPath: topicPath.substring(from: topicPathPrefix.endIndex)) {
-            listener?.orbDidDisappear(key)
+            listener?.orbDidDisappear(key: key)
         }
     }
 
