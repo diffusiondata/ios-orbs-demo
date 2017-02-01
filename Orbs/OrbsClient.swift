@@ -29,7 +29,7 @@ class OrbsClient: NSObject, PTDiffusionTopicStreamDelegate {
     fileprivate var session: PTDiffusionSession?
     var listener: OrbListener?
 
-    func connect(_ url: URL) {
+    func connect(url: URL) {
         if (nil != session) {
             // Already connecting or connected
             return

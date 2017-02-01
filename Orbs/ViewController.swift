@@ -32,7 +32,7 @@ class ViewController: UIViewController {
 
         // Connect immediately
         let url:URL = URL(string: "ws://localhost:8080")!;
-        client.connect(url)
+        client.connect(url: url)
 
         // Observe application foreground state, as we don't want our connection
         // to the Diffusion server active when in the background.
@@ -41,7 +41,7 @@ class ViewController: UIViewController {
             client.disconnect()
         })
         observers.append(nc.addObserver(forName: NSNotification.Name.UIApplicationWillEnterForeground, object: nil, queue: nil) { (NSNotification) in
-            client.connect(url)
+            client.connect(url: url)
         })
 
         // Maintain strong reference to the Orbs client for the lifespan of
