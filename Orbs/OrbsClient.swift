@@ -35,10 +35,10 @@ class OrbsClient: NSObject, PTDiffusionTopicStreamDelegate {
             return
         }
 
-        NSLog("Connecting...")
+        print("Connecting...")
         PTDiffusionSession.open(with: url) { (session, error) -> Void in
             if let connectedSession = session {
-                NSLog("Connected.")
+                print("Connected.")
 
                 // Maintain a strong reference to the session.
                 self.session = connectedSession
@@ -48,14 +48,14 @@ class OrbsClient: NSObject, PTDiffusionTopicStreamDelegate {
                 connectedSession.topics.addTopicStream(with: localSelector, delegate: self)
 
                 // Subscribe to the Orbs demo topic tree.
-                NSLog("Subscribing...")
+                print("Subscribing...")
                 connectedSession.topics.subscribe(withTopicSelectorExpression: topicSelector) { (error) -> Void in
                     if (error != nil) {
                         self.fail(error! as NSError)
                         return
                     }
 
-                    NSLog("Subscribed.")
+                    print("Subscribed.")
                 }
             } else {
                 self.fail(error! as NSError)
@@ -64,7 +64,7 @@ class OrbsClient: NSObject, PTDiffusionTopicStreamDelegate {
     }
 
     func disconnect() {
-        NSLog("Disconnecting")
+        print("Disconnecting")
         session?.close()
         session = nil
     }
@@ -83,6 +83,6 @@ class OrbsClient: NSObject, PTDiffusionTopicStreamDelegate {
     }
 
     private func fail(_ error: NSError) {
-        NSLog("Failed: %@", error)
+        print("Failed: \(error)")
     }
 }
